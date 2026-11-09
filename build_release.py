@@ -38,7 +38,11 @@ DEFAULT_OUT = os.path.join(HERE, "Retic-v2.2.0.zip")
 # ── 排除规则 ──────────────────────────────────────────────────────────────
 EXCLUDE_DIR_PREFIXES = ("reports/", "logs/", "执行日志/", "data/",
                         "__pycache__/", ".git/", ".idea/")
-EXCLUDE_FILE_NAMES = {"topology_layout.json", "topology.json", "topology.bak.json"}
+EXCLUDE_FILE_NAMES = {
+    "topology_layout.json", "topology.json", "topology.bak.json",
+    # 本机终端工具路径 / 检测缓存：含绝对路径，不能带进发布包
+    "terminal_tools.json", "terminal_tools_cache.json",
+}
 EXCLUDE_SUFFIXES = (".log", ".db", ".sqlite", ".sqlite3", ".pyc", ".bak", ".tmp", ".swp")
 EXCLUDE_DIR_MARKERS = ("/reports/", "/logs/", "/执行日志/", "/data/",
                        "/__pycache__/", "/.git/")
