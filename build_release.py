@@ -12,8 +12,8 @@ Retic 发布包构建脚本（防呆版）
     python build_release.py --check <zip>            # 只校验已有 zip，不重新打包
 
 默认路径（相对本脚本所在目录）：
-    源目录：Retic-v2.1.0/
-    输出：  Retic-v2.1.0.zip
+    源目录：Retic-v2.2.0/
+    输出：  Retic-v2.2.0.zip
 
 硬性规则：
   1. 排除 reports/、logs/ 下所有文件，以及 *.log/*.db/*.sqlite*/*.pyc/*.bak/*.tmp
@@ -32,14 +32,16 @@ import sys
 import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-DEFAULT_SRC = os.path.join(HERE, "Retic-v2.1.0")
-DEFAULT_OUT = os.path.join(HERE, "Retic-v2.1.0.zip")
+DEFAULT_SRC = os.path.join(HERE, "Retic-v2.2.0")
+DEFAULT_OUT = os.path.join(HERE, "Retic-v2.2.0.zip")
 
 # ── 排除规则 ──────────────────────────────────────────────────────────────
-EXCLUDE_DIR_PREFIXES = ("reports/", "logs/", "data/", "__pycache__/", ".git/", ".idea/")
+EXCLUDE_DIR_PREFIXES = ("reports/", "logs/", "执行日志/", "data/",
+                        "__pycache__/", ".git/", ".idea/")
 EXCLUDE_FILE_NAMES = {"topology_layout.json", "topology.json", "topology.bak.json"}
 EXCLUDE_SUFFIXES = (".log", ".db", ".sqlite", ".sqlite3", ".pyc", ".bak", ".tmp", ".swp")
-EXCLUDE_DIR_MARKERS = ("/reports/", "/logs/", "/data/", "/__pycache__/", "/.git/")
+EXCLUDE_DIR_MARKERS = ("/reports/", "/logs/", "/执行日志/", "/data/",
+                       "/__pycache__/", "/.git/")
 
 # 需要检查 / 脱敏的命令配置（含程序内置副本）
 COMMAND_FILES = ("config/commands.txt", "_internal/config/commands.txt")
@@ -85,7 +87,7 @@ def read_bytes(path: str):
 
 def clean_template_path(*parts) -> str:
     """始终从脚本旁的干净发布模板取默认值，绝不读可能被污染的源目录。"""
-    return os.path.join(HERE, "Retic-v2.1.0", *parts)
+    return os.path.join(HERE, "Retic-v2.2.0", *parts)
 
 
 def default_config_bytes() -> bytes:
